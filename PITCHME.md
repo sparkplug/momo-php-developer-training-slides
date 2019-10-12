@@ -108,6 +108,13 @@ Here is your User Id and API secret : {'apiKey': 'b0431db58a9b41faa8f5860230xxxx
 
 ---
 
+```sh
+$ mtnmomo --provider example.com --key 028b71f923f24df9a3d9fe90a6453
+Here is your User Id and API secret : {'apiKey': 'b0431db58a9b41faa8f5860230xxxxxx', 'UserId': '053c6dea-dd68-xxxx-xxxx-c830dac9f401'}
+```
+
+---
+
 
 ## Configuration
 
