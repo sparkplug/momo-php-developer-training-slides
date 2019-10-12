@@ -1,77 +1,337 @@
-# Let's Get Started
+---
+
+class: middle
+
+### Speaker
+
+# Moses Mugisha
+
+- Author of `mtn-momo` library
+
+- Senior Software Engineer At Andela
+
 
 ---
 
-## Add Some Slide Candy
+background-image: url(img/mmpic.jpg)
+class: middle
 
-![IMAGE](assets/img/presentation.png)
+# Agenda
 
----?color=linear-gradient(180deg, white 75%, black 25%)
-@title[Customize Slide Layout]
+Overview
 
-@snap[west span-50]
-## Customize the Layout
-@snapend
+Getting started
 
-@snap[east span-50]
-![IMAGE](assets/img/presentation.png)
-@snapend
+Architecture
 
-@snap[south span-100 text-white]
-Snap Layouts let you create custom slide designs directly within your markdown.
-@snapend
+Collections
 
----?color=linear-gradient(90deg, #5384AD 65%, white 35%)
-@title[Add A Little Imagination]
+Errors
 
-@snap[north-west h4-white]
-#### And start presenting...
-@snapend
-
-@snap[west span-55]
-@ul[list-spaced-bullets text-white text-09]
-- You will be amazed
-- What you can achieve
-- *With a little imagination...*
-- And **GitPitch Markdown**
-@ulend
-@snapend
-
-@snap[east span-45]
-@img[shadow](assets/img/conference.png)
-@snapend
+Disbursements
 
 ---
 
-@snap[north-east span-100 text-pink text-06]
-Let your code do the talking!
-@snapend
+class: center, middle
+background-color: #ffcc30
 
-```sql zoom-18
-CREATE TABLE "topic" (
-    "id" serial NOT NULL PRIMARY KEY,
-    "forum_id" integer NOT NULL,
-    "subject" varchar(255) NOT NULL
-);
-ALTER TABLE "topic"
-ADD CONSTRAINT forum_id
-FOREIGN KEY ("forum_id")
-REFERENCES "forum" ("id");
+# Overview
+
+---
+
+class: middle
+
+## What MTN Mobile Money provides?
+
+- sim card as a financial account
+- sending and receiving money
+- **withdraw and deposit through agents**
+- payments (utilities, momo pay, online)
+- network services (airtime, bundles)
+- **remittances**
+
+---
+
+class: middle
+
+# Your software is a virtual agent
+
+# with the Open API
+
+- withdraw from an account with the Collections API
+- deposit with Disbursements API
+- send money abroad with the Remittances API (NOT COVERED)
+- ability to collect payments using MoMo Pay (NOT COVERED)
+
+---
+
+class: center, middle
+background-color: #ffcc30
+
+# Getting started
+
+---
+
+class: middle
+
+## Developer Account
+
+- Sign up on https://momodeveloper.mtn.com/
+
+- Subscribe to Collections and Disbursement and obtain primary key for each
+
+---
+
+class: middle
+
+## Installation
+
+Add the latest version of the library to your project using pip:
+
+
+```sh
+ pip install mtnmomo
 ```
 
-@snap[south span-100 text-gray text-08]
-@[1-5](You can step-and-ZOOM into fenced-code blocks, source files, and Github GIST.)
-@[6,7, zoom-13](Using GitPitch live code presenting with optional annotations.)
-@[8-9, zoom-12](This means no more switching between your slide deck and IDE on stage.)
-@snapend
+This will install
+
+- the latest `mtnmomo` as a dependency
+- the `mtnmomo` command line tool
+
+---
+
+class: middle
+
+## Sandbox credentials
+
+Generate sandbox credentials using the command line tool;
+
+```sh
+$ mtnmomo --provider example.com --key 028b71f923f24df9a3d9fe90a6453
+Here is your User Id and API secret : {'apiKey': 'b0431db58a9b41faa8f5860230xxxxxx', 'UserId': '053c6dea-dd68-xxxx-xxxx-c830dac9f401'}
+```
+
+- provider is your application's domain
+
+- Primary key is your subscription key from momodeveloper account
+
+- You will get a user secret and user id which we will use later
+
+- We have to do this separately for collections and disbursement
+
+---
+
+class: middle
+
+## Configuration
+
+- Best practice to configure as environment variables
+
+```js
+config = {
+   "ENVIRONMENT": os.environ.get("ENVIRONMENT"), 
+   "BASE_URL": os.environ.get("BASE_URL"), 
+   "CALLBACK_HOST": os.environ.get("CALLBACK_HOST"), # Mandatory.
+   "COLLECTION_PRIMARY_KEY": os.environ.get("COLLECTION_PRIMARY_KEY"), 
+   "COLLECTION_USER_ID": os.environ.get("COLLECTION_USER_ID"),
+   "COLLECTION_API_SECRET": os.environ.get("COLLECTION_API_SECRET"),
+   "REMITTANCE_USER_ID": os.environ.get("REMITTANCE_USER_ID"), 
+   "REMITTANCE_API_SECRET": os.environ.get("REMITTANCE_API_SECRET"),
+   "REMITTANCE_PRIMARY_KEY": os.envieon.get("REMITTANCE_PRIMARY_KEY"),
+   "DISBURSEMENT_USER_ID": os.environ.get("DISBURSEMENT_USER_ID"), 
+   "DISBURSEMENT_API_SECRET": os.environ.get("DISBURSEMENTS_API_SECRET"),
+   "DISBURSEMENT_PRIMARY_KEY": os.environ.get("DISBURSEMENT_PRIMARY_KEY"), 
+}
+```
 
 
----?image=assets/img/presenter.jpg
+---
 
-@snap[north span-100 h2-white]
-## Now It's Your Turn
-@snapend
+class: center, middle
 
-@snap[south span-100 text-06]
-[Click here to jump straight into the interactive feature guides in the GitPitch Docs @fa[external-link]](https://gitpitch.com/docs/getting-started/tutorial/)
-@snapend
+## For maximum security, implement the integration with MTN in your backend
+
+This way, you will not need any secret keys in your client
+
+---
+
+class: center, middle
+background-color: #ffcc30
+
+# Collections
+
+Withdraw money from your customer's account
+
+---
+
+class: middle
+
+## Initializing collections
+
+```python
+import os
+from mtnmomo.collection import Collection
+
+client = Collection({
+        "COLLECTION_USER_ID": os.environ.get("COLLECTION_USER_ID"),
+        "COLLECTION_API_SECRET": os.environ.get("COLLECTION_API_SECRET"),
+        "COLLECTION_PRIMARY_KEY": os.environ.get("COLLECTION_PRIMARY_KEY"),
+    })
+```
+
+---
+
+class: middle
+
+## Requesting a payment
+
+- Call `requestToPay`, it returns a transaction id
+- You can store the transaction id for later use
+
+```python
+client = Collection({
+    "COLLECTION_USER_ID": os.environ.get("COLLECTION_USER_ID"),
+    "COLLECTION_API_SECRET": os.environ.get("COLLECTION_API_SECRET"),
+    "COLLECTION_PRIMARY_KEY": os.environ.get("COLLECTION_PRIMARY_KEY"),
+})
+
+try:
+    transaction_ref = client.requestToPay(
+        mobile="256772123456", 
+        amount="600",
+        external_id="123456789",
+        payee_note="dd", 
+        payer_message="dd",
+        currency="EUR")
+except MomoError e:
+    print(e)
+```
+
+---
+
+class: middle
+
+## Requesting a payment
+
+- In sandbox, use EUR as the currency ¯\\\_(ツ)\_/¯
+- In production, use the currency of your country
+- Use reference of your database transaction record as `externalId`
+- `payerMessage` appears on your customer's statement
+- `payeeNote` appears on your statement (as a virtual agent)
+
+---
+
+class: middle
+
+# But the payment is not yet complete
+
+As an agent, you cannot exchange your goods until you are sure the payment has transferred to your account
+
+So how can you be sure that the transaction has been completed?
+
+---
+
+class: middle
+
+# Polling
+
+- Before exchanging goods, call `getTransaction` with the transaction id every few seconds until it succeeds or fails
+- This technique is known as polling
+
+---
+
+class: middle
+
+# Callback
+
+- if you do not want to poll, you can setup an API endpoint to receive requests from MTN when the transaction status changes,
+- you can pass the endpoint url as part of `requestToPay`
+- your endpoint should be called when the transaction fails or succeeds
+- Note that callbacks do not currently work in the sandbox 
+
+---
+
+class: middle
+
+# Errors
+
+- a transaction can fail immediately if;
+  - credentials are incorrect/invalid/expired
+  - the provided parameters are invalid (depending on the environment)
+  - the phone number is not registered for mobile money
+  - the customer has insufficient balance
+- a transaction can fail eventually if;
+  - the customer cancels the transaction
+  - transaction times out
+
+---
+
+class: center, middle
+background-color: #ffcc30
+
+# Disbursements
+
+Deposit money to a mobile money account
+
+---
+
+class: middle
+
+## Initializing disbursements
+
+```python
+import os
+from mtnmomo.collection import Disbursement
+
+client = Disbursement({
+    "DISBURSEMENT_USER_ID": os.environ.get("DISBURSEMENT_USER_ID"),
+    "DISBURSEMENT_API_SECRET": os.environ.get("DISBURSEMENT_API_SECRET"),
+    "DISBURSEMENT_PRIMARY_KEY": os.environ.get("DISBURSEMENT_PRIMARY_KEY"),
+})
+```
+
+NOTE: remember to use a generate new credentials using a disbursements primary key
+
+---
+
+class: middle
+
+## Making a payment
+
+- Call `transfer`, it returns  a transaction id or fails with  an error
+
+```python
+import os
+from mtnmomo.collection import Disbursement
+
+client = Disbursement({
+    "DISBURSEMENT_USER_ID": os.environ.get("DISBURSEMENT_USER_ID"),
+    "DISBURSEMENT_API_SECRET": os.environ.get("DISBURSEMENT_API_SECRET"),
+    "DISBURSEMENT_PRIMARY_KEY": os.environ.get("DISBURSEMENT_PRIMARY_KEY"),
+})
+
+client.transfer(amount="600", mobile="256772123456", external_id="123456789", payee_note="dd",      payer_message="dd", currency="EUR")
+```
+
+---
+
+class: middle
+
+## Making a payment
+
+- Same as collections;
+  - In sandbox, use EUR as the currency ¯\\\_(ツ)\_/¯
+  - In production, use the currency of your country
+  - Use a reference of your database record as `externalId`
+- `payerMessage` appears on your statement
+- `payeeNote` appears on the receiver's statement
+
+---
+
+class: middle
+
+## Making a payment
+
+- Since there is no approval process for disbursements, it safe to assume they complete immediately
+- For 100% certainty, you can poll using `disbursements.getTransaction` or use the callback
+- Error handling is same as collections
