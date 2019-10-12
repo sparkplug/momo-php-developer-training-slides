@@ -13,9 +13,6 @@ class: middle
 
 ---
 
-background-image: url(img/mmpic.jpg)
-class: middle
-
 # Agenda
 
 Overview
@@ -32,14 +29,11 @@ Disbursements
 
 ---
 
-class: center, middle
-background-color: #ffcc30
 
 # Overview
 
 ---
 
-class: middle
 
 ## What MTN Mobile Money provides?
 
@@ -52,7 +46,6 @@ class: middle
 
 ---
 
-class: middle
 
 # Your software is a virtual agent
 
@@ -65,14 +58,11 @@ class: middle
 
 ---
 
-class: center, middle
-background-color: #ffcc30
 
 # Getting started
 
 ---
 
-class: middle
 
 ## Developer Account
 
@@ -82,7 +72,6 @@ class: middle
 
 ---
 
-class: middle
 
 ## Installation
 
@@ -100,7 +89,6 @@ This will install
 
 ---
 
-class: middle
 
 ## Sandbox credentials
 
@@ -121,13 +109,12 @@ Here is your User Id and API secret : {'apiKey': 'b0431db58a9b41faa8f5860230xxxx
 
 ---
 
-class: middle
 
 ## Configuration
 
 - Best practice to configure as environment variables
 
-```js
+```python
 config = {
    "ENVIRONMENT": os.environ.get("ENVIRONMENT"), 
    "BASE_URL": os.environ.get("BASE_URL"), 
@@ -155,8 +142,6 @@ This way, you will not need any secret keys in your client
 
 ---
 
-class: center, middle
-background-color: #ffcc30
 
 # Collections
 
@@ -181,7 +166,6 @@ client = Collection({
 
 ---
 
-class: middle
 
 ## Requesting a payment
 
@@ -209,7 +193,6 @@ except MomoError e:
 
 ---
 
-class: middle
 
 ## Requesting a payment
 
@@ -221,7 +204,6 @@ class: middle
 
 ---
 
-class: middle
 
 # But the payment is not yet complete
 
@@ -231,7 +213,6 @@ So how can you be sure that the transaction has been completed?
 
 ---
 
-class: middle
 
 # Polling
 
@@ -240,7 +221,6 @@ class: middle
 
 ---
 
-class: middle
 
 # Callback
 
@@ -251,7 +231,6 @@ class: middle
 
 ---
 
-class: middle
 
 # Errors
 
@@ -266,8 +245,6 @@ class: middle
 
 ---
 
-class: center, middle
-background-color: #ffcc30
 
 # Disbursements
 
@@ -275,7 +252,6 @@ Deposit money to a mobile money account
 
 ---
 
-class: middle
 
 ## Initializing disbursements
 
@@ -294,7 +270,6 @@ NOTE: remember to use a generate new credentials using a disbursements primary k
 
 ---
 
-class: middle
 
 ## Making a payment
 
@@ -315,7 +290,6 @@ client.transfer(amount="600", mobile="256772123456", external_id="123456789", pa
 
 ---
 
-class: middle
 
 ## Making a payment
 
@@ -328,7 +302,6 @@ class: middle
 
 ---
 
-class: middle
 
 ## Making a payment
 
