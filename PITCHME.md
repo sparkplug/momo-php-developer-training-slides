@@ -225,11 +225,14 @@ require_once('/path/to/momoapi-php/init.php');
 ### Sandbox credentials
 
 
- The library ships with a commandline application that helps to create sandbox credentials. It assumes you have created an account on `https://momodeveloper.mtn.com` and have your `Ocp-Apim-Subscription-Key`. 
+ The library ships with a commandline application that helps 
+ to create sandbox credentials. It assumes you have created an
+ account on `https://momodeveloper.mtn.com` 
+ and have your `Ocp-Apim-Subscription-Key`. 
 
 ```bash
 ## within the project, on the command line. In this example, our domain is akabbo.ug
-$ ./vendor/momoapi-php/lib/Provision.php
+$ ./vendor/sparkplug/momoapi-php/lib/Provision.php
 $ providerCallBackHost: https://akabbo.ug
 $ Ocp-Apim-Subscription-Key: f83xx8d8xx6749f19a26e2265aeadbcdeg
 ```
