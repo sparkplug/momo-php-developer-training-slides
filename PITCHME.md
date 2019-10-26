@@ -51,7 +51,7 @@
 - Request/Response APIs
 - Event Driven APIs
 
-
+---
 ### Request/Response APIS 
 
 - APIs define a set of endpoints
@@ -87,7 +87,7 @@ Create, Read,Update, and Delete (CRUD) transactions against these resources
           - one   for the collection, like /users ,
           - and one for a specific element, like /users/U123 .
           
-          
+---          
 ### Rules Cont ....
 
 - Nouns are used instead of verbs for resources. 
@@ -110,7 +110,7 @@ Create, Read,Update, and Delete (CRUD) transactions against these resources
       PUT  -> for replacing a resource
       PATCH -> for partial update of a resource
 
-
+---
 ## What MTN Mobile Money provides?
 
 - sim card as a financial account
@@ -172,7 +172,8 @@ Generate sandbox credentials using the command line tool;
 
 ```sh
 $ mtnmomo --provider example.com --key 028b71f923f24df9a3d9fe90a6453
-Here is your User Id and API secret : {'apiKey': 'b0431db58a9b41faa8f5860230xxxxxx', 'UserId': '053c6dea-dd68-xxxx-xxxx-c830dac9f401'}
+Here is your User Id and API secret : {'apiKey': 'b0431db58a9b41faa8f5860230xxxxxx',
+'UserId': '053c6dea-dd68-xxxx-xxxx-c830dac9f401'}
 ```
 
 - provider is your application's domain
@@ -187,7 +188,8 @@ Here is your User Id and API secret : {'apiKey': 'b0431db58a9b41faa8f5860230xxxx
 
 ```sh
 $ mtnmomo --provider example.com --key 028b71f923f24df9a3d9fe90a6453
-Here is your User Id and API secret : {'apiKey': 'b0431db58a9b41faa8f5860230xxxxxx', 'UserId': '053c6dea-dd68-xxxx-xxxx-c830dac9f401'}
+Here is your User Id and API secret : {'apiKey': 'b0431db58a9b41faa8f5860230xxxxxx', 
+'UserId': '053c6dea-dd68-xxxx-xxxx-c830dac9f401'}
 ```
 
 ---
