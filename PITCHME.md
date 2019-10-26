@@ -135,7 +135,9 @@ Create, Read,Update, and Delete (CRUD) transactions against these resources
 ---
 
 
-# Getting started
+# MOMO API Archtecture
+
+![Logo](assets/img/api_gateway.jpg)
 
 ---
 
