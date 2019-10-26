@@ -214,7 +214,7 @@ To use the bindings, use Composer's [autoload](https://getcomposer.org/doc/01-ba
 require_once('vendor/autoload.php');
 ```
 ---
-## Manual Installation
+### Manual Installation
 
 If you do not wish to use Composer, you can download the [latest release](https://github.com/sparkplug/momoapi-php/releases). Then, to use the bindings, include the `init.php` file.
 
@@ -222,7 +222,7 @@ If you do not wish to use Composer, you can download the [latest release](https:
 require_once('/path/to/momoapi-php/init.php');
 ```
 ---
-## Sandbox credentials
+### Sandbox credentials
 
 
  The library ships with a commandline application that helps to create sandbox credentials. It assumes you have created an account on `https://momodeveloper.mtn.com` and have your `Ocp-Apim-Subscription-Key`. 
@@ -233,7 +233,9 @@ $ ./vendor/momoapi-php/lib/Provision.php
 $ providerCallBackHost: https://akabbo.ug
 $ Ocp-Apim-Subscription-Key: f83xx8d8xx6749f19a26e2265aeadbcdeg
 ```
-```
+---
+
+### Creds ...
 
 - providerCallBackHost is your application's domain
 
@@ -245,6 +247,7 @@ $ Ocp-Apim-Subscription-Key: f83xx8d8xx6749f19a26e2265aeadbcdeg
 
 ---
 
+## feedback
 
 ```bash
 Here is your User Id and API secret : {'apiKey': 'b0431db58a9b41faa8f5860230xxxxxx', 'UserId': '053c6dea-dd68-xxxx-xxxx-c830dac9f401'}
@@ -253,7 +256,7 @@ Here is your User Id and API secret : {'apiKey': 'b0431db58a9b41faa8f5860230xxxx
 ---
 
 
-## Configuration
+### Configuration
 
 - Best practice to configure as environment variables
 
@@ -346,7 +349,7 @@ $client = Collection();
 ---
 
 
-## Requesting a payment
+### Requesting a payment
 
 - In sandbox, use EUR as the currency ¯\\\_(ツ)\_/¯
 - In production, use the currency of your country
@@ -357,7 +360,7 @@ $client = Collection();
 ---
 
 
-# But the payment is not yet complete
+### But the payment is not yet complete
 
 As an agent, you cannot exchange your goods until you are sure the payment has transferred to your account
 
@@ -366,7 +369,7 @@ So how can you be sure that the transaction has been completed?
 ---
 
 
-# Polling
+### Polling
 
 - Before exchanging goods, call `getTransaction` with the transaction id every few seconds until it succeeds or fails
 - This technique is known as polling
@@ -374,7 +377,7 @@ So how can you be sure that the transaction has been completed?
 ---
 
 
-# Callback
+### Callback
 
 - if you do not want to poll, you can setup an API endpoint to receive requests from MTN when the transaction status changes,
 - you can pass the endpoint url as part of `requestToPay`
@@ -384,7 +387,7 @@ So how can you be sure that the transaction has been completed?
 ---
 
 
-# Errors
+### Errors
 
 - a transaction can fail immediately if;
   - credentials are incorrect/invalid/expired
@@ -398,7 +401,7 @@ So how can you be sure that the transaction has been completed?
 ---
 
 
-# Disbursements
+### Disbursements
 
 Deposit money to a mobile money account
 
@@ -408,7 +411,7 @@ Deposit money to a mobile money account
 
 
 
-## Making a payment
+### Making a payment
 
 - Call `transfer`, it returns  a transaction id or fails with  an error
 
@@ -429,7 +432,7 @@ Deposit money to a mobile money account
 ---
 
 
-## Making a payment
+### Making a payment
 
 - Same as collections;
   - In sandbox, use EUR as the currency ¯\\\_(ツ)\_/¯
