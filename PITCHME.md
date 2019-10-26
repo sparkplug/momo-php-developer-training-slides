@@ -123,9 +123,10 @@ Create, Read,Update, and Delete (CRUD) transactions against these resources
 ---
 
 
-# Your software is a virtual agent
 
-# with the Open API
+
+### with the Open API
+ - Your software is a virtual agent
 
 - withdraw from an account with the Collections API
 - deposit with Disbursements API
@@ -135,14 +136,14 @@ Create, Read,Update, and Delete (CRUD) transactions against these resources
 ---
 
 
-# MOMO API Archtecture
+### MOMO API Archtecture
 
 ![Logo](assets/img/api_gateway.jpg)
 
 ---
 
 
-## Developer Account
+### Developer Account
 
 - Sign up on https://momodeveloper.mtn.com/
 
@@ -151,7 +152,7 @@ Create, Read,Update, and Delete (CRUD) transactions against these resources
 ---
 
 
-## Installation
+### Installation
 
 Add the latest version of the library to your project using pip:
 
