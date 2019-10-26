@@ -56,8 +56,8 @@
 
 - APIs define a set of endpoints
 - Clients make HTTP requests for data to those endpoints and the server returns responses
-- The response is typically sent back as JSON or XML or binary 
-- Examples REST, GraphQL,RPC
+- The response is typically sent back as JSON or XML or binary.
+          - Examples REST, GraphQL,RPC
 
 ---
 
@@ -65,7 +65,7 @@
 - An API will send  a message to the configured URL when something happens
 - Request/Response APIs can implement this through continuous polling of the server.
 
-Examples Websockets, webhooks
+       - Examples Websockets, webhooks
  
 ---
 
@@ -85,9 +85,32 @@ Create, Read,Update, and Delete (CRUD) transactions against these resources
 - For each resource, two URLs are generally implemented: 
 
           - one   for the collection, like /users ,
-           - and one for a specific element, like /users/U123 .
+          - and one for a specific element, like /users/U123 .
+          
+          
+### Rules Cont ....
 
+- Nouns are used instead of verbs for resources. 
+
+       For example, instead of /getUserInfo/U123  , use /users/U123 
+       
+ - HTTP methods like GET , POST , UPDATE , and DELETE inform the
+    server about the action to be performed
+    
+    
 ---
+
+### Rules cont ...
+
+- Different HTTP methods invoked on the same URL provide different functionality
+
+      POST -> for creating new resources
+      GET -> for retriving a resource
+      DELETE -> for deleting a resource
+      PUT  -> for replacing a resource
+      PATCH -> for partial update of a resource
+
+
 ## What MTN Mobile Money provides?
 
 - sim card as a financial account
