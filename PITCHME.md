@@ -205,7 +205,7 @@ You are required to have PHP 5.4.0 and later.
 You can install the bindings via [Composer](http://getcomposer.org/). Run the following command:
 
 ```bash
-composer require sparkplug/momoapi-php
+composer require sparkplug/momoapi-php:dev-master
 ```
 
 To use the bindings, use Composer's [autoload](https://getcomposer.org/doc/01-basic-usage.md#autoloading):
