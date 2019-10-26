@@ -200,34 +200,44 @@ they are used to track developers, usage, and policy configurations.
 
 ### Installation
 
-Add the latest version of the library to your project using pip:
+You are required to have PHP 5.4.0 and later.
 
+You can install the bindings via [Composer](http://getcomposer.org/). Run the following command:
 
-```sh
- pip install mtnmomo
+```bash
+composer require sparkplug/momoapi-php
 ```
 
-This will install
+To use the bindings, use Composer's [autoload](https://getcomposer.org/doc/01-basic-usage.md#autoloading):
 
-- the latest `mtnmomo` as a dependency
-- the `mtnmomo` command line tool
-
+```php
+require_once('vendor/autoload.php');
+```
 ---
+## Manual Installation
 
+If you do not wish to use Composer, you can download the [latest release](https://github.com/sparkplug/momoapi-php/releases). Then, to use the bindings, include the `init.php` file.
 
+```php
+require_once('/path/to/momoapi-php/init.php');
+```
+---
 ## Sandbox credentials
 
-Generate sandbox credentials using the command line tool;
 
-```sh
-$ mtnmomo --provider example.com --key 028b71f923f24df9a3d9fe90a6453
-Here is your User Id and API secret : {'apiKey': 'b0431db58a9b41faa8f5860230xxxxxx',
-'UserId': '053c6dea-dd68-xxxx-xxxx-c830dac9f401'}
+ The library ships with a commandline application that helps to create sandbox credentials. It assumes you have created an account on `https://momodeveloper.mtn.com` and have your `Ocp-Apim-Subscription-Key`. 
+
+```bash
+## within the project, on the command line. In this example, our domain is akabbo.ug
+$ ./vendor/momoapi-php/lib/Provision.php
+$ providerCallBackHost: https://akabbo.ug
+$ Ocp-Apim-Subscription-Key: f83xx8d8xx6749f19a26e2265aeadbcdeg
+```
 ```
 
-- provider is your application's domain
+- providerCallBackHost is your application's domain
 
-- Primary key is your subscription key from momodeveloper account
+- Ocp-Apim-Subscription-Key is your subscription key from momodeveloper account
 
 - You will get a user secret and user id which we will use later
 
@@ -235,10 +245,9 @@ Here is your User Id and API secret : {'apiKey': 'b0431db58a9b41faa8f5860230xxxx
 
 ---
 
-```sh
-$ mtnmomo --provider example.com --key 028b71f923f24df9a3d9fe90a6453
-Here is your User Id and API secret : {'apiKey': 'b0431db58a9b41faa8f5860230xxxxxx', 
-'UserId': '053c6dea-dd68-xxxx-xxxx-c830dac9f401'}
+
+```bash
+Here is your User Id and API secret : {'apiKey': 'b0431db58a9b41faa8f5860230xxxxxx', 'UserId': '053c6dea-dd68-xxxx-xxxx-c830dac9f401'}
 ```
 
 ---
@@ -248,54 +257,69 @@ Here is your User Id and API secret : {'apiKey': 'b0431db58a9b41faa8f5860230xxxx
 
 - Best practice to configure as environment variables
 
-```python
-config = {
-   "ENVIRONMENT": os.environ.get("ENVIRONMENT"), 
-   "BASE_URL": os.environ.get("BASE_URL"), 
-   "CALLBACK_HOST": os.environ.get("CALLBACK_HOST"), # Mandatory.
-   "COLLECTION_PRIMARY_KEY": os.environ.get("COLLECTION_PRIMARY_KEY"), 
-   "COLLECTION_USER_ID": os.environ.get("COLLECTION_USER_ID"),
-   "COLLECTION_API_SECRET": os.environ.get("COLLECTION_API_SECRET"),
-   "REMITTANCE_USER_ID": os.environ.get("REMITTANCE_USER_ID"), 
-   "REMITTANCE_API_SECRET": os.environ.get("REMITTANCE_API_SECRET"),
-   "REMITTANCE_PRIMARY_KEY": os.envieon.get("REMITTANCE_PRIMARY_KEY"),
-   "DISBURSEMENT_USER_ID": os.environ.get("DISBURSEMENT_USER_ID"), 
-   "DISBURSEMENT_API_SECRET": os.environ.get("DISBURSEMENTS_API_SECRET"),
-   "DISBURSEMENT_PRIMARY_KEY": os.environ.get("DISBURSEMENT_PRIMARY_KEY"), 
-}
-```
+* `BASE_URL`: An optional base url to the MTN Momo API. By default the staging base url will be used
+* `ENVIRONMENT`: Optional enviroment, either "sandbox" or "production". Default is 'sandbox'
+* `CURRENCY`: currency by default its EUR
+* `CALLBACK_HOST`: The domain where you webhooks urls are hosted. This is mandatory.
+* `COLLECTION_PRIMARY_KEY`: The collections API primary key,
+* `COLLECTION_USER_ID`:  The collection User Id
+* `COLLECTION_API_SECRET`:  The Collection API secret
+* `REMITTANCE_USER_ID`:  The Remittance User ID
+* `REMITTANCE_API_SECRET`: The Remittance API Secret
+* `REMITTANCE_PRIMARY_KEY`: The Remittance Subscription Key
+* `DISBURSEMENT_USER_ID`: The Disbursement User ID
+* `DISBURSEMENT_API_SECRET`: The Disbursement API Secret
+* `DISBURSEMENT_PRIMARY_KEY`: The Disbursement Primary Key
 
-
----
-
-class: center, middle
-
-## For maximum security, implement the integration with MTN in your backend
+For maximum security, implement the integration with MTN in your backend
 
 This way, you will not need any secret keys in your client
 
+
+---
+
+### conf cont ..
+
+you can also use the MomoApi to globally set the different variables.
+
+
+
+```php
+MomoApi::setBaseUrl('base');
+
+MomoApi::setTargetEnvironment("targetenv");
+
+MomoApi::setCurrency("UGX");
+
+MomoApi::setCollectionApiSecret("collection_api_secret");
+
+MomoApi::setCollectionPrimaryKey("collection_primary_key");
+
+MomoApi::setCollectionUserId("collection_user_id");
+
+```
+
 ---
 
 
-# Collections
+### Collections
 
 Withdraw money from your customer's account
 
 ---
 
-class: middle
+### Initializing collections
 
-## Initializing collections
+The collections client can be created with the following paramaters. Note that the `COLLECTION_USER_ID` and `COLLECTION_API_SECRET` for production are provided on the MTN OVA dashboard;
 
-```python
-import os
-from mtnmomo.collection import Collection
+* `COLLECTION_PRIMARY_KEY`: Primary Key for the `Collection` product on the developer portal.
+* `COLLECTION_USER_ID`: For sandbox, use the one generated with the `mtnmomo` command.
+* `COLLECTION_API_SECRET`: For sandbox, use the one generated with the `mtnmomo` command.
 
-client = Collection({
-        "COLLECTION_USER_ID": os.environ.get("COLLECTION_USER_ID"),
-        "COLLECTION_API_SECRET": os.environ.get("COLLECTION_API_SECRET"),
-        "COLLECTION_PRIMARY_KEY": os.environ.get("COLLECTION_PRIMARY_KEY"),
-    })
+You can create a collection client with the following:
+
+```php
+$client = Collection();
 ```
 
 ---
@@ -306,23 +330,17 @@ client = Collection({
 - Call `requestToPay`, it returns a transaction id
 - You can store the transaction id for later use
 
-```python
-client = Collection({
-    "COLLECTION_USER_ID": os.environ.get("COLLECTION_USER_ID"),
-    "COLLECTION_API_SECRET": os.environ.get("COLLECTION_API_SECRET"),
-    "COLLECTION_PRIMARY_KEY": os.environ.get("COLLECTION_PRIMARY_KEY"),
-})
 
-try:
-    transaction_ref = client.requestToPay(
-        mobile="256772123456", 
-        amount="600",
-        external_id="123456789",
-        payee_note="dd", 
-        payer_message="dd",
-        currency="EUR")
-except MomoError e:
-    print(e)
+```php
+
+        $coll = new Collection($currency = "c..", $baseUrl = "url..", $targetEnvironment = "u...", $collectionApiSecret = "u...", $collectionPrimaryKey = "u...", $collectionUserId = "u..."]);
+
+        $params = ['mobile' => "256782181656", 'payee_note' => "34", 'payer_message' => "12", 'external_id' => "ref", 'currency' => "EUR", 'amount' => "500"];
+
+        $t = $coll->requestToPay($params);
+
+        $transaction = $coll->getTransaction($t);
+
 ```
 
 ---
@@ -387,39 +405,25 @@ Deposit money to a mobile money account
 ---
 
 
-## Initializing disbursements
 
-```python
-import os
-from mtnmomo.collection import Disbursement
-
-client = Disbursement({
-    "DISBURSEMENT_USER_ID": os.environ.get("DISBURSEMENT_USER_ID"),
-    "DISBURSEMENT_API_SECRET": os.environ.get("DISBURSEMENT_API_SECRET"),
-    "DISBURSEMENT_PRIMARY_KEY": os.environ.get("DISBURSEMENT_PRIMARY_KEY"),
-})
-```
-
-NOTE: remember to use a generate new credentials using a disbursements primary key
-
----
 
 
 ## Making a payment
 
 - Call `transfer`, it returns  a transaction id or fails with  an error
 
-```python
-import os
-from mtnmomo.collection import Disbursement
 
-client = Disbursement({
-    "DISBURSEMENT_USER_ID": os.environ.get("DISBURSEMENT_USER_ID"),
-    "DISBURSEMENT_API_SECRET": os.environ.get("DISBURSEMENT_API_SECRET"),
-    "DISBURSEMENT_PRIMARY_KEY": os.environ.get("DISBURSEMENT_PRIMARY_KEY"),
-})
+```php
 
-client.transfer(amount="600", mobile="256772123456", external_id="123456789", payee_note="dd",      payer_message="dd", currency="EUR")
+        $disbursement = new Disbursement();
+
+        $params = ['mobile' => "256782181656", 'payee_note' => "34", 'payer_message' => "12", 'external_id' => "ref", 'currency' => "EUR", 'amount' => "500"];
+
+        $t = $disbursement->requestToPay($params);
+
+
+        $transaction = $disbursement->getTransaction($t);
+
 ```
 
 ---
