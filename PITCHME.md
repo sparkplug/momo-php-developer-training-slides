@@ -1,39 +1,93 @@
 ---
 
 
-### Speaker
+# Speaker
 
-# Moses Mugisha
+### Moses Mugisha
 
 - Author of `mtn-momo` library
-
 - Senior Software Engineer At Andela
 
 
 ---
 
-# Agenda
+### What is an API?
 
-Overview
-
-Getting started
-
-Architecture
-
-Collections
-
-Errors
-
-Disbursements
+- Application Programming Interface
+- interface that a software program presents to other programs, to humans & internet
+- mostly intended to be understood and used by humans writing those other programs
 
 ---
 
+### Examples Of APIS
 
-# Overview
+- Momo API ;)
+- GITHUB API
+- Facebook graph API
 
 ---
 
+### What makes a great API
+- Usability
+- Scalability 
+- Performance
+- Documentation and developer resources
 
+---
+
+### API Paradigms
+
+- REST API
+- RPC
+- GraphQL
+- Websockets
+- Webhooks
+
+---
+
+### Which can be Divided into
+
+ 
+- Request/Response APIs
+- Event Driven APIs
+
+
+### Request/Response APIS 
+
+- APIs define a set of endpoints
+- Clients make HTTP requests for data to those endpoints and the server returns responses
+- The response is typically sent back as JSON or XML or binary 
+- Examples REST, GraphQL,RPC
+
+---
+
+### Event Driven APIS
+- An API will send  a message to the configured URL when something happens
+- Request/Response APIs can implement this through continuous polling of the server.
+
+Examples Websockets, webhooks
+ 
+---
+
+### REST APIs
+- Representational State Transfer (REST) 
+- Its about resources
+- A resource is an entity that can be identified, named,addressed, or handled on the web. 
+- REST APIs expose data as resources and use standard HTTP methods to represent CRUD
+Create, Read,Update, and Delete (CRUD) transactions against these resources
+
+---
+
+### General Guidelines for REST
+
+- Resources are part of URLs, like /users .
+
+- For each resource, two URLs are generally implemented: 
+
+          - one   for the collection, like /users ,
+           - and one for a specific element, like /users/U123 .
+
+---
 ## What MTN Mobile Money provides?
 
 - sim card as a financial account
