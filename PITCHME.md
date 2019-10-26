@@ -135,6 +135,10 @@ Create, Read,Update, and Delete (CRUD) transactions against these resources
 
 ---
 
+###  API Archtecture
+
+- Leverages Azure API management
+- To understand how the API works, we need to understand azure API management
 
 ### MOMO API Archtecture
 
@@ -142,7 +146,49 @@ Create, Read,Update, and Delete (CRUD) transactions against these resources
 
 ---
 
+## Archtecture Cont ...
 
+API Gateway and the portal. 
+The portal provides two different experiences, publisher and developer.
+
+---
+
+### API Gateway
+
+ - API Gateway is the core engine
+ - receives payment requests, processes them, connects to the backend service,
+    and responding to requests.
+    
+  ---
+
+### Products
+
+- Products are the consumable packages in Azure API Management. 
+- Products contain APIs, and one product can have multiple APIs.
+- Also contain usage quota and the terms of use.
+
+---
+
+### Products
+
+![Logo](assets/img/products.jpg)
+---
+
+### Subscriptions
+- Primary or secondar and are interchangable
+
+- Subscription Keys are associated with a single prodduct 
+
+- The subscription keys act as a first-level security feature, but more importantly, 
+they are used to track developers, usage, and policy configurations.
+
+- Developers can also register their applications using the developer portal
+- A developer can have more than one subscription to each product. 
+- Each subscription is identified by a subscription key, and each subscription key is scoped to a product.
+ - A developer cannot use a single subscription key for two different products
+
+
+---
 ### Developer Account
 
 - Sign up on https://momodeveloper.mtn.com/
